@@ -12,6 +12,7 @@ List::List()
 
 List::~List()
 {
+	delete[] _items;
 }
 
 int List::Count()
