@@ -33,13 +33,17 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
+    <ClInclude Include="..\DataStructuresLib\DoublyLinkedList.h" />
+    <ClInclude Include="..\DataStructuresLib\LinkedListNode.h" />
     <ClInclude Include="..\DataStructuresLib\List.h" />
+    <ClInclude Include="DoublyLinkedListTests.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="test.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\DataStructuresLib\DoublyLinkedList.cpp" />
     <ClCompile Include="..\DataStructuresLib\List.cpp" />
-    <ClCompile Include="test.cpp" />
+    <ClCompile Include="DoublyLinkedListTests.cpp" />
+    <ClCompile Include="ListTests.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
