@@ -11,7 +11,8 @@ BinaryTree::BinaryTree()
 
 BinaryTree::~BinaryTree()
 {
-	delete _rootNode;
+	while (_rootNode)
+		remove(_rootNode);
 }
 
 int BinaryTree::Count()
@@ -84,6 +85,11 @@ void BinaryTree::Remove(int value)
 		throw std::out_of_range("Value not found");
 
 	remove(nodeToBeRemoved);
+}
+
+int* BinaryTree::Nodes()
+{
+	return nullptr;
 }
 
 BinaryTreeNode* BinaryTree::find(int value, BinaryTreeNode *node)

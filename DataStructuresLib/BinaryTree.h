@@ -13,6 +13,8 @@ public:
 	void Insert(int value);
 	BinaryTreeNode* Find(int value);
 	void Remove(int value);
+	int* Nodes();
+
 
 private:
 	int _count;
