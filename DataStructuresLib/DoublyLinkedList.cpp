@@ -73,7 +73,7 @@ int DoublyLinkedList::Last()
 LinkedListNode* DoublyLinkedList::Find(int item)
 {
 	if (_count == 0)
-		throw std::out_of_range("index out of range");
+		throw std::out_of_range("Can't find on empty collection");
 
 	LinkedListNode* currentNode = _head->nextItem;
 	while (currentNode->nextItem != _tail)

@@ -33,15 +33,19 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
+    <ClInclude Include="..\DataStructuresLib\BinaryTree.h" />
+    <ClInclude Include="..\DataStructuresLib\BinaryTreeNode.h" />
     <ClInclude Include="..\DataStructuresLib\DoublyLinkedList.h" />
     <ClInclude Include="..\DataStructuresLib\LinkedListNode.h" />
     <ClInclude Include="..\DataStructuresLib\List.h" />
-    <ClInclude Include="DoublyLinkedListTests.h" />
+    <ClInclude Include="BinaryTreeTests.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\DataStructuresLib\BinaryTree.cpp" />
     <ClCompile Include="..\DataStructuresLib\DoublyLinkedList.cpp" />
     <ClCompile Include="..\DataStructuresLib\List.cpp" />
+    <ClCompile Include="BinaryTreeTests.cpp" />
     <ClCompile Include="DoublyLinkedListTests.cpp" />
     <ClCompile Include="ListTests.cpp" />
     <ClCompile Include="pch.cpp">

@@ -151,12 +151,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BinaryTree.h" />
+    <ClInclude Include="BinaryTreeNode.h" />
     <ClInclude Include="DoublyLinkedList.h" />
     <ClInclude Include="LinkedListNode.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BinaryTree.cpp" />
     <ClCompile Include="DataStructuresLib.cpp" />
     <ClCompile Include="DoublyLinkedList.cpp" />
     <ClCompile Include="List.cpp" />

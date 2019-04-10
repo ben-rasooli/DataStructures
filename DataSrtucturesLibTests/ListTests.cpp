@@ -20,7 +20,7 @@ TEST_F(ListTests, a_new_list_has_zero_count_and_is_empty)
 
 }
 
-TEST_F(ListTests, a_list_becomes_non_empty_when_pushing_new_items)
+TEST_F(ListTests, a_list_becomes_non_empty_when_pushing_new_item)
 {
 	_sut.PushBack(1);
 
@@ -120,7 +120,7 @@ TEST_F(ListTests, accessing_out_of_range_index_throws_exception)
 	EXPECT_THROW(_sut[-1], out_of_range);
 }
 
-TEST_F(ListTests, PushBack_add_the_item_to_end_of_the_list)
+TEST_F(ListTests, PushBack_adds_the_item_to_end_of_the_list)
 {
 	int item_1 = 1;
 	int item_2 = 2;
@@ -136,7 +136,7 @@ TEST_F(ListTests, PushBack_add_the_item_to_end_of_the_list)
 	EXPECT_EQ(actualLastItem, item_2);
 }
 
-TEST_F(ListTests, PushFront_add_the_item_to_start_of_the_list)
+TEST_F(ListTests, PushFront_adds_the_item_to_start_of_the_list)
 {
 	int item_1 = 1;
 	int item_2 = 2;

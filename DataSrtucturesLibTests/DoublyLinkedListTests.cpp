@@ -2,7 +2,6 @@
 #include <stdexcept>
 #include "../DataStructuresLib/DoublyLinkedList.h"
 #include "../DataStructuresLib/LinkedListNode.h"
-#include "DoublyLinkedListTests.h"
 
 using namespace std;
 
@@ -21,7 +20,7 @@ TEST_F(DoublyLinkedListTests, a_new_linkedList_has_zero_count_and_is_empty)
 	EXPECT_TRUE(actualIfEmpty);
 }
 
-TEST_F(DoublyLinkedListTests, a_linkedList_becomes_non_empty_when_pushing_new_items)
+TEST_F(DoublyLinkedListTests, a_linkedList_becomes_non_empty_when_pushing_new_item)
 {
 	_sut.PushBack(1);
 
@@ -51,7 +50,7 @@ TEST_F(DoublyLinkedListTests, accessing_first_or_last_item_on_empty_linkedList_t
 	EXPECT_THROW(_sut.Last(), out_of_range);
 }
 
-TEST_F(DoublyLinkedListTests, PushBack_add_the_item_to_end_of_the_linkedList)
+TEST_F(DoublyLinkedListTests, PushBack_adds_the_item_to_end_of_the_linkedList)
 {
 	_sut.PushBack(1);
 	_sut.PushBack(2);
@@ -64,7 +63,7 @@ TEST_F(DoublyLinkedListTests, PushBack_add_the_item_to_end_of_the_linkedList)
 	EXPECT_EQ(actualLastItem, 3);
 }
 
-TEST_F(DoublyLinkedListTests, PushFront_add_the_item_to_start_of_the_linkedList)
+TEST_F(DoublyLinkedListTests, PushFront_adds_the_item_to_start_of_the_linkedList)
 {
 	_sut.PushFront(1);
 	_sut.PushFront(2);
