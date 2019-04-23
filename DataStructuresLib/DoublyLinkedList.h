@@ -39,25 +39,21 @@ public:
 	void PushBack(int item)
 	{
 		insert(_tail->prevItem, _tail, item);
-
-		_count++;
 	}
 
 	void PushFront(int item)
 	{
 		insert(_head, _head->nextItem, item);
-
-		_count++;
 	}
 
-	void PushAfter(LinkedListNode node, T item)
+	void PushAfter(LinkedListNode* node, T item)
 	{
-
+		insert(node, node->nextItem, item);
 	}
 
-	void PushBefore(LinkedListNode node, T item)
+	void PushBefore(LinkedListNode* node, T item)
 	{
-
+		insert(node->prevItem, node, item);
 	}
 
 	int First()
@@ -82,7 +78,7 @@ public:
 			throw std::out_of_range("Can't find on empty collection");
 
 		LinkedListNode* currentNode = _head->nextItem;
-		while (currentNode->nextItem != _tail)
+		while (currentNode != _tail)
 		{
 			if (currentNode->Value == item)
 				return currentNode;
@@ -107,5 +103,7 @@ private:
 
 		leftNode->nextItem = pushedItem;
 		rightNode->prevItem = pushedItem;
+
+		_count++;
 	}
 };

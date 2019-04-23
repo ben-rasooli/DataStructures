@@ -47,6 +47,13 @@ TYPED_TEST(DoublyLinkedListTests, Count_is_incremented_when_pushing_an_item)
 	actualCountAfterPush = _sut.Count();
 
 	EXPECT_EQ(actualCountAfterPush, 4);
+
+	LinkedListNode* item = _sut.Find(1);
+	_sut.PushAfter(item, 1);
+	_sut.PushBefore(item, 1);
+	actualCountAfterPush = _sut.Count();
+
+	EXPECT_EQ(actualCountAfterPush, 6);
 }
 
 TYPED_TEST(DoublyLinkedListTests, accessing_first_or_last_item_on_empty_linkedList_throws_exception)
@@ -79,6 +86,30 @@ TYPED_TEST(DoublyLinkedListTests, PushFront_adds_the_item_to_start_of_the_linked
 
 	EXPECT_EQ(actualFirstItem, 3);
 	EXPECT_EQ(actualLastItem, 1);
+}
+
+TYPED_TEST(DoublyLinkedListTests, PushAfter_inserts_the_item_after_a_specified_item)
+{
+	_sut.PushBack(1);
+	_sut.PushBack(2);
+	_sut.PushBack(4);
+
+	LinkedListNode* item_2 = _sut.Find(2);
+	LinkedListNode* item_4 = _sut.Find(4);
+
+	int actualItem_2_nextItem_beforePushing = item_2->nextItem->Value;
+	int actualItem_4_prevItem_beforePushing = item_4->prevItem->Value;
+
+	_sut.PushAfter(item_2, 3);
+
+	int actualItem_2_nextItem_afterPushing = item_2->nextItem->Value;
+	int actualItem_4_prevItem_afterPushing = item_4->prevItem->Value;
+
+	EXPECT_EQ(actualItem_2_nextItem_beforePushing, 4);
+	EXPECT_EQ(actualItem_4_prevItem_beforePushing, 2);
+
+	EXPECT_EQ(actualItem_2_nextItem_afterPushing, 3);
+	EXPECT_EQ(actualItem_4_prevItem_afterPushing, 3);
 }
 
 TYPED_TEST(DoublyLinkedListTests, Find_throws_exception_on_empty_linkedList)
