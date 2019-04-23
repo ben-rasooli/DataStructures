@@ -1,5 +1,8 @@
 #pragma once
 #include "BinaryTreeNode.h"
+#include "List.h"
+
+using namespace std;
 
 class BinaryTree
 {
@@ -13,7 +16,7 @@ public:
 	void Insert(int value);
 	BinaryTreeNode* Find(int value);
 	void Remove(int value);
-	int* Nodes();
+	List<int>* GetSortedItems();
 
 
 private:
@@ -25,5 +28,6 @@ private:
 	void removeLeafNode(BinaryTreeNode* node);
 	void removeSingleSubnodedNode(BinaryTreeNode* node);
 	void removeDoubleSubnodedNode(BinaryTreeNode* node);
+	void traverseInorder(BinaryTreeNode* node, List<int>* accumilator);
 };
 

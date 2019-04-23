@@ -87,9 +87,11 @@ void BinaryTree::Remove(int value)
 	remove(nodeToBeRemoved);
 }
 
-int* BinaryTree::Nodes()
+List<int>* BinaryTree::GetSortedItems()
 {
-	return nullptr;
+	List<int>* result = new List<int>();
+	traverseInorder(_rootNode, result);
+	return result;
 }
 
 BinaryTreeNode* BinaryTree::find(int value, BinaryTreeNode *node)
@@ -124,10 +126,13 @@ void BinaryTree::remove(BinaryTreeNode* node)
 
 void BinaryTree::removeLeafNode(BinaryTreeNode* node)
 {
-	if (node->supernode->leftSubnode == node)
-		node->supernode->leftSubnode = nullptr;
+	if (node == _rootNode)
+		_rootNode = nullptr;
 	else
-		node->supernode->rightSubnode = nullptr;
+		if (node->supernode->leftSubnode == node)
+			node->supernode->leftSubnode = nullptr;
+		else
+			node->supernode->rightSubnode = nullptr;
 
 	delete node;
 	node = nullptr;
@@ -144,11 +149,14 @@ void BinaryTree::removeSingleSubnodedNode(BinaryTreeNode* node)
 
 	subnodeOfRemovedNode->supernode = node->supernode;
 
-	// find which of its supernode's subnodes is this node
-	if (node->supernode->leftSubnode == node)
-		node->supernode->leftSubnode = subnodeOfRemovedNode;
+	if (node == _rootNode)
+		_rootNode = subnodeOfRemovedNode;
 	else
-		node->supernode->rightSubnode = subnodeOfRemovedNode;
+		// find which of its supernode's subnodes is this node
+		if (node->supernode->leftSubnode == node)
+			node->supernode->leftSubnode = subnodeOfRemovedNode;
+		else
+			node->supernode->rightSubnode = subnodeOfRemovedNode;
 
 	delete node;
 	node = nullptr;
@@ -166,3 +174,12 @@ void BinaryTree::removeDoubleSubnodedNode(BinaryTreeNode* node)
 
 	remove(currentNode);
 }
+
+void BinaryTree::traverseInorder(BinaryTreeNode* node, List<int>* accumilator) {
+	if (!node) return;
+
+	traverseInorder(node->leftSubnode, accumilator);
+	accumilator->PushBack(node->Value);
+	traverseInorder(node->rightSubnode, accumilator);
+}
+

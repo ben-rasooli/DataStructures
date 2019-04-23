@@ -1,7 +1,10 @@
 #include "pch.h"
 #include <stdexcept>
+#include <gtest/gtest.h>
+#include <sstream>
 #include "../DataStructuresLib/BinaryTree.h"
 #include "../DataStructuresLib/BinaryTreeNode.h"
+#include "../DataStructuresLib/List.h"
 
 using namespace std;
 
@@ -217,7 +220,12 @@ TEST_F(BinaryTreeTests, removing_a_doubleSubnodedNode_only_reassigns_its_value_w
 
 }
 
-TEST_F(BinaryTreeTests, passing_test)
+TEST_F(BinaryTreeTests, GetSortedItems_returns_all_items_sorted)
 {
-	EXPECT_TRUE(true);
+	insertSampleValues();
+	List<int>* actualItems = _sut.GetSortedItems();
+
+	EXPECT_EQ(actualItems->ToString(), "1,3,4,5,7,8");
+
+	delete actualItems;
 }
