@@ -1,17 +1,22 @@
 #include "pch.h"
 #include <stdexcept>
+#include <gtest/gtest.h>
 #include "../DataStructuresLib/DoublyLinkedList.h"
 #include "../DataStructuresLib/LinkedListNode.h"
 
 using namespace std;
 
+template<typename T>
 class DoublyLinkedListTests : public testing::Test
 {
 protected:
-	DoublyLinkedList _sut;
+	DoublyLinkedList<int> _sut;
 };
 
-TEST_F(DoublyLinkedListTests, a_new_linkedList_has_zero_count_and_is_empty)
+using MyTypes = testing::Types< int >;
+TYPED_TEST_CASE(DoublyLinkedListTests, MyTypes);
+
+TYPED_TEST(DoublyLinkedListTests, a_new_linkedList_has_zero_count_and_is_empty)
 {
 	int actualCount = _sut.Count();
 	bool actualIfEmpty = _sut.IsEmpty();
@@ -20,7 +25,7 @@ TEST_F(DoublyLinkedListTests, a_new_linkedList_has_zero_count_and_is_empty)
 	EXPECT_TRUE(actualIfEmpty);
 }
 
-TEST_F(DoublyLinkedListTests, a_linkedList_becomes_non_empty_when_pushing_new_item)
+TYPED_TEST(DoublyLinkedListTests, a_linkedList_becomes_non_empty_when_pushing_new_item)
 {
 	_sut.PushBack(1);
 
@@ -29,7 +34,7 @@ TEST_F(DoublyLinkedListTests, a_linkedList_becomes_non_empty_when_pushing_new_it
 	EXPECT_FALSE(actualIfEmpty);
 }
 
-TEST_F(DoublyLinkedListTests, Count_is_incremented_when_pushing_an_item)
+TYPED_TEST(DoublyLinkedListTests, Count_is_incremented_when_pushing_an_item)
 {
 	_sut.PushBack(1);
 	_sut.PushBack(1);
@@ -44,13 +49,13 @@ TEST_F(DoublyLinkedListTests, Count_is_incremented_when_pushing_an_item)
 	EXPECT_EQ(actualCountAfterPush, 4);
 }
 
-TEST_F(DoublyLinkedListTests, accessing_first_or_last_item_on_empty_linkedList_throws_exception)
+TYPED_TEST(DoublyLinkedListTests, accessing_first_or_last_item_on_empty_linkedList_throws_exception)
 {
 	EXPECT_THROW(_sut.First(), out_of_range);
 	EXPECT_THROW(_sut.Last(), out_of_range);
 }
 
-TEST_F(DoublyLinkedListTests, PushBack_adds_the_item_to_end_of_the_linkedList)
+TYPED_TEST(DoublyLinkedListTests, PushBack_adds_the_item_to_end_of_the_linkedList)
 {
 	_sut.PushBack(1);
 	_sut.PushBack(2);
@@ -63,7 +68,7 @@ TEST_F(DoublyLinkedListTests, PushBack_adds_the_item_to_end_of_the_linkedList)
 	EXPECT_EQ(actualLastItem, 3);
 }
 
-TEST_F(DoublyLinkedListTests, PushFront_adds_the_item_to_start_of_the_linkedList)
+TYPED_TEST(DoublyLinkedListTests, PushFront_adds_the_item_to_start_of_the_linkedList)
 {
 	_sut.PushFront(1);
 	_sut.PushFront(2);
@@ -76,12 +81,12 @@ TEST_F(DoublyLinkedListTests, PushFront_adds_the_item_to_start_of_the_linkedList
 	EXPECT_EQ(actualLastItem, 1);
 }
 
-TEST_F(DoublyLinkedListTests, Find_throws_exception_on_empty_linkedList)
+TYPED_TEST(DoublyLinkedListTests, Find_throws_exception_on_empty_linkedList)
 {
 	EXPECT_THROW(_sut.Find(1), out_of_range);
 }
 
-TEST_F(DoublyLinkedListTests, Find_returns_a_LinkedListNode_based_on_searching_value)
+TYPED_TEST(DoublyLinkedListTests, Find_returns_a_LinkedListNode_based_on_searching_value)
 {
 	_sut.PushBack(1);
 	_sut.PushBack(2);

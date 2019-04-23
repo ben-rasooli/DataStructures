@@ -43,8 +43,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\DataStructuresLib\BinaryTree.cpp" />
-    <ClCompile Include="..\DataStructuresLib\DoublyLinkedList.cpp" />
-    <ClCompile Include="..\DataStructuresLib\List.cpp" />
     <ClCompile Include="BinaryTreeTests.cpp" />
     <ClCompile Include="DoublyLinkedListTests.cpp" />
     <ClCompile Include="ListTests.cpp" />
