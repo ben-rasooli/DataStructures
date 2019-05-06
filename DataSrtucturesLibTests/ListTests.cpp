@@ -372,3 +372,24 @@ TYPED_TEST(ListTests, QuickSort_can_sort_the_items_using_a_sortBy_funtion)
 	EXPECT_EQ(_sut[3], 4);
 	EXPECT_EQ(_sut[4], 5);
 }
+
+TYPED_TEST(ListTests, two_lists_are_equal_if_they_have_same_items)
+{
+	List<int> sut_1;
+	sut_1.PushBack(1);
+	sut_1.PushBack(2);
+	sut_1.PushBack(3);
+	sut_1.PushBack(4);
+	sut_1.PushBack(5);
+
+	List<int> sut_2;
+	sut_2.PushBack(1);
+	sut_2.PushBack(2);
+	sut_2.PushBack(3);
+	sut_2.PushBack(4);
+	sut_2.PushBack(5);
+
+	bool actualEquals = sut_1.Equals(&sut_2);
+
+	EXPECT_TRUE(actualEquals);
+}

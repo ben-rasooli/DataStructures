@@ -170,6 +170,21 @@ public:
 		return result.str();
 	}
 
+	bool Equals(List<T>* other)
+	{
+		return GetHash() == other->GetHash();
+	}
+
+	unsigned int GetHash()
+	{
+		unsigned int hash = 0;
+
+		for (unsigned int i = 0; i < _count; ++i)
+			hash = (hash * 1313) + _items[i] * 13;
+
+		return hash;
+	}
+
 private:
 	int _count;
 	int _size;
