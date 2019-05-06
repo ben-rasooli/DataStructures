@@ -157,6 +157,7 @@
     <ClInclude Include="LinkedListNode.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Stack.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BinaryTree.cpp" />
