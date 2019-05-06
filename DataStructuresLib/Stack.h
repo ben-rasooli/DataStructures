@@ -13,7 +13,10 @@ public:
 		_items = new DoublyLinkedList<T>();
 	}
 
-	~Stack(){}
+	~Stack()
+	{
+		delete _items;
+	}
 
 	int Count()
 	{
