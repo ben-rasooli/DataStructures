@@ -14,16 +14,18 @@ public:
 		_head = new LinkedListNode();
 		_tail = new LinkedListNode();
 
-		_head->prevItem = nullptr;
-		_head->nextItem = _tail;
+		_head->prevNode = nullptr;
+		_head->nextNode = _tail;
 
-		_tail->prevItem = _head;
-		_tail->nextItem = nullptr;
+		_tail->prevNode = _head;
+		_tail->nextNode = nullptr;
 	}
 
 	~DoublyLinkedList()
 	{
-
+		Clear();
+		delete _head;
+		delete _tail;
 	}
 
 	int Count()
@@ -33,60 +35,113 @@ public:
 
 	bool IsEmpty()
 	{
-		return _count == 0;
+		return _count == 0 && _head->nextNode == _tail && _tail->prevNode == _head;
 	}
 
 	void PushBack(int item)
 	{
-		insert(_tail->prevItem, _tail, item);
+		insert(_tail->prevNode, _tail, item);
 	}
 
 	void PushFront(int item)
 	{
-		insert(_head, _head->nextItem, item);
+		insert(_head, _head->nextNode, item);
 	}
 
 	void PushAfter(LinkedListNode* node, T item)
 	{
-		insert(node, node->nextItem, item);
+		insert(node, node->nextNode, item);
 	}
 
 	void PushBefore(LinkedListNode* node, T item)
 	{
-		insert(node->prevItem, node, item);
+		insert(node->prevNode, node, item);
 	}
 
-	int First()
+	T First()
 	{
-		if (_count == 0)
-			throw std::out_of_range("index out of range");
+		if (_head->nextNode == _tail)
+			throw std::out_of_range("Linked list is empty");
 
-		return _head->nextItem->Value;
+		return _head->nextNode->Value;
 	}
 
-	int Last()
+	T Last()
 	{
-		if (_count == 0)
-			throw std::out_of_range("index out of range");
+		if (_tail->prevNode == _head)
+			throw std::out_of_range("Linked list is empty");
 
-		return _tail->prevItem->Value;
+		return _tail->prevNode->Value;
 	}
 
-	LinkedListNode* Find(int item)
+
+	//--------------------------------------------------
+	// It returns the first matching Item
+	//--------------------------------------------------
+	LinkedListNode* Find(T item)
 	{
 		if (_count == 0)
 			throw std::out_of_range("Can't find on empty collection");
 
-		LinkedListNode* currentNode = _head->nextItem;
+		LinkedListNode* currentNode = _head->nextNode;
 		while (currentNode != _tail)
 		{
 			if (currentNode->Value == item)
 				return currentNode;
 
-			currentNode = currentNode->nextItem;
+			currentNode = currentNode->nextNode;
 		}
 
 		return nullptr;
+	}
+
+	//--------------------------------------------------
+	// It returns the last matching Item
+	//--------------------------------------------------
+	LinkedListNode* FindLast(T item)
+	{
+		if (_count == 0)
+			throw std::out_of_range("Can't find on empty collection");
+
+		LinkedListNode* currentNode = _tail->prevNode;
+		while (currentNode != _head)
+		{
+			if (currentNode->Value == item)
+				return currentNode;
+
+			currentNode = currentNode->prevNode;
+		}
+
+		return nullptr;
+	}
+
+	void Remove(T item)
+	{
+		if (_count == 0)
+			throw std::out_of_range("Can't remove on empty collection");
+
+		remove(Find(item));
+	}
+
+	void Remove(LinkedListNode* itemNode)
+	{
+		remove(itemNode);
+	}
+
+	void Clear()
+	{
+		_count = 0;
+
+		LinkedListNode* currentNode = _head->nextNode;
+		while (currentNode != _tail)
+		{
+			LinkedListNode* nextNode = currentNode->nextNode;
+			delete currentNode;
+			currentNode = nextNode;
+		}
+
+		_head->nextNode = _tail;
+		_tail->prevNode = _head;
 	}
 
 private:
@@ -98,12 +153,24 @@ private:
 	{
 		auto pushedItem = new LinkedListNode();
 		pushedItem->Value = item;
-		pushedItem->prevItem = leftNode;
-		pushedItem->nextItem = rightNode;
+		pushedItem->prevNode = leftNode;
+		pushedItem->nextNode = rightNode;
 
-		leftNode->nextItem = pushedItem;
-		rightNode->prevItem = pushedItem;
+		leftNode->nextNode = pushedItem;
+		rightNode->prevNode = pushedItem;
 
 		_count++;
+	}
+
+	void remove(LinkedListNode* node)
+	{
+		LinkedListNode* prevNode = node->prevNode;
+		LinkedListNode* nextNode = node->nextNode;
+
+		delete node;
+		prevNode->nextNode = nextNode;
+		nextNode->prevNode = prevNode;
+
+		_count--;
 	}
 };

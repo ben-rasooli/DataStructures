@@ -3,6 +3,6 @@
 struct LinkedListNode
 {
 	int Value;
-	LinkedListNode* nextItem;
-	LinkedListNode* prevItem;
+	LinkedListNode* nextNode;
+	LinkedListNode* prevNode;
 };
