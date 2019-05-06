@@ -102,7 +102,7 @@ TYPED_TEST(ListTests, Size_is_increased_when_not_enough_space_to_insert_a_new_it
 		_sut.PushBack(i);
 
 	int insertionIndex = 5;
-	_sut.Insert(insertionIndex,0);
+	_sut.Insert(insertionIndex, 0);
 
 	int actualSizeAfterPush = _sut.Size();
 
@@ -303,4 +303,72 @@ TYPED_TEST(ListTests, Clear_removes_all_items)
 	EXPECT_FALSE(actualIfEmptyBeforeClear);
 	EXPECT_TRUE(actualIfEmptyAfterClear);
 	EXPECT_THROW(_sut[0], out_of_range);
+}
+
+TYPED_TEST(ListTests, Sort_sorts_the_items)
+{
+	_sut.PushBack(4);
+	_sut.PushBack(5);
+	_sut.PushBack(1);
+	_sut.PushBack(3);
+	_sut.PushBack(2);
+
+	_sut.Sort();
+
+	EXPECT_EQ(_sut[0], 1);
+	EXPECT_EQ(_sut[1], 2);
+	EXPECT_EQ(_sut[2], 3);
+	EXPECT_EQ(_sut[3], 4);
+	EXPECT_EQ(_sut[4], 5);
+}
+
+TYPED_TEST(ListTests, Sort_can_sort_the_items_using_a_predicate_funtion)
+{
+	_sut.PushBack(4);
+	_sut.PushBack(5);
+	_sut.PushBack(1);
+	_sut.PushBack(3);
+	_sut.PushBack(2);
+
+	_sut.Sort([](int l, int r) {return l > r; });
+
+	EXPECT_EQ(_sut[0], 1);
+	EXPECT_EQ(_sut[1], 2);
+	EXPECT_EQ(_sut[2], 3);
+	EXPECT_EQ(_sut[3], 4);
+	EXPECT_EQ(_sut[4], 5);
+}
+
+TYPED_TEST(ListTests, QuickSort_sorts_the_items)
+{
+	_sut.PushBack(4);
+	_sut.PushBack(5);
+	_sut.PushBack(1);
+	_sut.PushBack(3);
+	_sut.PushBack(2);
+
+	_sut.QuickSort();
+
+	EXPECT_EQ(_sut[0], 1);
+	EXPECT_EQ(_sut[1], 2);
+	EXPECT_EQ(_sut[2], 3);
+	EXPECT_EQ(_sut[3], 4);
+	EXPECT_EQ(_sut[4], 5);
+}
+
+TYPED_TEST(ListTests, QuickSort_can_sort_the_items_using_a_sortBy_funtion)
+{
+	_sut.PushBack(4);
+	_sut.PushBack(5);
+	_sut.PushBack(1);
+	_sut.PushBack(3);
+	_sut.PushBack(2);
+
+	_sut.QuickSort([](int item) {return item; });
+
+	EXPECT_EQ(_sut[0], 1);
+	EXPECT_EQ(_sut[1], 2);
+	EXPECT_EQ(_sut[2], 3);
+	EXPECT_EQ(_sut[3], 4);
+	EXPECT_EQ(_sut[4], 5);
 }

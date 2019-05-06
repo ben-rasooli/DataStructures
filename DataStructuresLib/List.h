@@ -2,6 +2,7 @@
 #include "pch.h"
 #include <stdexcept>
 #include <sstream>
+#include <functional>
 
 using namespace std;
 
@@ -21,37 +22,37 @@ public:
 		delete[] _items;
 	}
 
-	
+
 	int Count()
 	{
 		return _count;
 	}
 
-	
+
 	int Size()
 	{
 		return _size;
 	}
 
-	
+
 	bool IsEmpty()
 	{
 		return _count == 0;
 	}
 
-	
+
 	void PushBack(T item)
 	{
 		Insert(_count, item);
 	}
 
-	
+
 	void PushFront(T item)
 	{
 		Insert(0, item);
 	}
 
-	
+
 	void Insert(int index, T item)
 	{
 		if (index < 0 || index > _count)
@@ -68,19 +69,19 @@ public:
 		_count++;
 	}
 
-	
+
 	T PopBack()
 	{
 		return Erase(_count - 1);
 	}
 
-	
+
 	T PopFront()
 	{
 		return Erase(0);
 	}
 
-	
+
 	T Erase(int index)
 	{
 		if (index < 0 || index >= _count)
@@ -96,7 +97,7 @@ public:
 		return result;
 	}
 
-	
+
 	void Remove(T item)
 	{
 		int itemIndex = -1;
@@ -108,31 +109,51 @@ public:
 			Erase(itemIndex);
 	}
 
-	
+
 	void Clear()
 	{
 		_count = 0;
 	}
 
-	
+
 	T First()
 	{
 		return _items[0];
 	}
 
-	
+
 	T Last()
 	{
 		return _items[_count - 1];
 	}
 
-	
+
 	T operator[] (int index)
 	{
 		if (index < 0 || index >= _count)
 			throw std::out_of_range("index out of range");
 
 		return _items[index];
+	}
+
+	void Sort()
+	{
+		bubleSort([](int l, int r) {return l > r; });
+	}
+
+	void Sort(const function <bool(T, T)> predicate)
+	{
+		bubleSort(predicate);
+	}
+
+	void QuickSort()
+	{
+		quickSort(_items, 0, _count - 1, [](int item) {return item; });
+	}
+
+	void QuickSort(const function <int(T)> sortBy)
+	{
+		quickSort(_items, 0, _count - 1, sortBy);
 	}
 
 	string ToString()
@@ -164,5 +185,60 @@ private:
 
 		delete[] _items;
 		_items = biggerItems;
+	}
+
+	void bubleSort(const function <bool(T, T)> predicate)
+	{
+		bool swapped;
+		for (int i = 0; i < _count - 1; i++)
+		{
+			swapped = false;
+			for (int j = 0; j < _count - i - 1; j++)
+			{
+				if (predicate(_items[j], _items[j + 1]))
+				{
+					swap(&_items[j], &_items[j + 1]);
+					swapped = true;
+				}
+			}
+
+			if (swapped == false)
+				break;
+		}
+	}
+
+	void quickSort(T* items, int low, int high, const function <int(T)> sortBy)
+	{
+		if (sortBy(low) < sortBy(high))
+		{
+			int partitionIndex = partition(items, low, high, sortBy);
+
+			quickSort(items, low, partitionIndex - 1, sortBy);
+			quickSort(items, partitionIndex + 1, high, sortBy);
+		}
+	}
+
+	int partition(T* items, int low, int high, const function <int(T)> sortBy)
+	{
+		T pivot = items[high];
+		int smallerIndex = (low - 1);
+
+		for (int j = low; j <= high - 1; j++)
+		{
+			if (sortBy(items[j]) <= sortBy(pivot))
+			{
+				smallerIndex++;
+				swap(&items[smallerIndex], &items[j]);
+			}
+		}
+		swap(&items[smallerIndex + 1], &items[high]);
+		return (smallerIndex + 1);
+	}
+
+	void swap(int* a, int* b)
+	{
+		int t = *a;
+		*a = *b;
+		*b = t;
 	}
 };
