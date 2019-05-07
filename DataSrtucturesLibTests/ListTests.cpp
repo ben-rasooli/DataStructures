@@ -373,6 +373,23 @@ TYPED_TEST(ListTests, QuickSort_can_sort_the_items_using_a_sortBy_funtion)
 	EXPECT_EQ(_sut[4], 5);
 }
 
+TYPED_TEST(ListTests, MergeSort_sorts_the_items)
+{
+	_sut.PushBack(4);
+	_sut.PushBack(5);
+	_sut.PushBack(1);
+	_sut.PushBack(3);
+	_sut.PushBack(2);
+
+	_sut.MergeSort();
+
+	EXPECT_EQ(_sut[0], 1);
+	EXPECT_EQ(_sut[1], 2);
+	EXPECT_EQ(_sut[2], 3);
+	EXPECT_EQ(_sut[3], 4);
+	EXPECT_EQ(_sut[4], 5);
+}
+
 TYPED_TEST(ListTests, two_lists_are_equal_if_they_have_same_items)
 {
 	List<int> sut_1;

@@ -156,6 +156,16 @@ public:
 		quickSort(_items, 0, _count - 1, sortBy);
 	}
 
+	void MergeSort()
+	{
+		mergeSort(_items, 0, _count - 1, [](int item) {return item; });
+	}
+
+	void MergeSort(const function <int(T)> sortBy)
+	{
+		mergeSort(_items, 0, _count - 1, sortBy);
+	}
+
 	string ToString()
 	{
 		stringstream result;
@@ -255,5 +265,51 @@ private:
 		int t = *a;
 		*a = *b;
 		*b = t;
+	}
+
+	void mergeSort(T* items, int low, int high, const function <int(T)> sortBy)
+	{
+		if (low < high)
+		{
+			int middle = low + (high - low) / 2;
+ 
+			mergeSort(items, low, middle, sortBy);
+			mergeSort(items, middle + 1, high, sortBy);
+
+			merge(items, low, middle, high, sortBy);
+		}
+	}
+
+	void merge(T* items, int low, int mid, int high, const function <int(T)> sortBy)
+	{
+		int p1 = low;
+		int p2 = mid + 1;
+		T* merged = (T*)malloc(sizeof(T) * (high - low + 1));
+		int p = 0;
+		while (p1 < mid + 1 && p2 < high + 1)
+		{
+			if (sortBy(items[p1]) > sortBy(items[p2]))
+			{
+				merged[p] = items[p2];
+				p2++;
+			}
+			else
+			{
+				merged[p] = items[p1];
+				p1++;
+			}
+			p++;
+		}
+
+		while (p1 < mid + 1)
+			merged[p++] = items[p1++];
+
+		while (p2 < high + 1)
+			merged[p++] = items[p2++];
+
+		for (int i = 0; i < (high - low + 1); i++)
+			items[low + i] = merged[i];
+
+		free(merged);
 	}
 };
