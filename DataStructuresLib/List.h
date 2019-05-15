@@ -203,7 +203,7 @@ private:
 	void expandArray()
 	{
 		_size *= 2;
-		int* biggerItems = new int[_size];
+		T* biggerItems = new T[_size];
 
 		for (auto i = 0; i < _count; i++)
 			biggerItems[i] = _items[i];
