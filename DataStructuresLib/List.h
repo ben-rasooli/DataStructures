@@ -14,7 +14,7 @@ public:
 	{
 		_count = 0;
 		_size = 10;
-		_items = new int[_size];
+		_items = new T[_size];
 	}
 
 	~List()
