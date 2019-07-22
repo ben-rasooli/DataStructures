@@ -87,7 +87,7 @@ public:
 		if (index < 0 || index >= _count)
 			throw std::out_of_range("index out of range");
 
-		int result = _items[index];
+		T result = _items[index];
 
 		for (auto i = index; i < _count - 1; i++)
 			_items[i] = _items[i + 1];
@@ -105,7 +105,7 @@ public:
 			if (_items[i] == item)
 				itemIndex = i;
 
-		if (itemIndex > 0)
+		if (itemIndex >= 0)
 			Erase(itemIndex);
 	}
 
@@ -125,6 +125,22 @@ public:
 	T Last()
 	{
 		return _items[_count - 1];
+	}
+
+	T Find(const function <bool(T)> predicate)
+	{
+		for (int i = 0; i < _count; i++)
+			if (predicate(_items[i]))
+				return _items[i];
+	}
+
+	bool HasValue(T item)
+	{
+		for (int i = 0; i < _count; i++)
+			if (_items[i] == item)
+				return true;
+
+		return false;
 	}
 
 
@@ -260,9 +276,9 @@ private:
 		return (smallerIndex + 1);
 	}
 
-	void swap(int* a, int* b)
+	void swap(T* a, T* b)
 	{
-		int t = *a;
+		T t = *a;
 		*a = *b;
 		*b = t;
 	}

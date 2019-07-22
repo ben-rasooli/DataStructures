@@ -230,23 +230,23 @@ TYPED_TEST(ListTests, Erase_throws_exception_if_passed_out_of_range_index)
 TYPED_TEST(ListTests, Remove_removes_an_item_and_shift_other_items_to_fill_the_gap)
 {
 	//arrange
-	int firstItem = 1;
-	int itemToBeRemoved = 2;
+	int itemToBeRemoved = 1;
+	int secondItem = 2;
 	int thirdItem = 3;
 
-	_sut.PushBack(firstItem);
 	_sut.PushBack(itemToBeRemoved);
+	_sut.PushBack(secondItem);
 	_sut.PushBack(thirdItem);
 
 	//act
 	int countBeforeErase = _sut.Count();
 	_sut.Remove(itemToBeRemoved);
 	int actualCountAfterErase = _sut.Count();
-	int actualShiftedItem = _sut[1];
+	int actualShiftedItem = _sut[0];
 
 	//assert
 	EXPECT_EQ(actualCountAfterErase, countBeforeErase - 1);
-	EXPECT_EQ(actualShiftedItem, thirdItem);
+	EXPECT_EQ(actualShiftedItem, secondItem);
 }
 
 TYPED_TEST(ListTests, PopBack_removes_last_item_and_returns_it)
