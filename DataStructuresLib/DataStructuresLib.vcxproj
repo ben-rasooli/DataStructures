@@ -154,6 +154,7 @@
     <ClInclude Include="BinaryTree.h" />
     <ClInclude Include="BinaryTreeNode.h" />
     <ClInclude Include="DoublyLinkedList.h" />
+    <ClInclude Include="Heap.h" />
     <ClInclude Include="LinkedListNode.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="pch.h" />

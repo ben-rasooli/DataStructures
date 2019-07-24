@@ -1,8 +1,4 @@
 #include "pch.h"
-#include <stdexcept>
-#include <gtest/gtest.h>
-#include "../DataStructuresLib/DoublyLinkedList.h"
-#include "../DataStructuresLib/LinkedListNode.h"
 
 using namespace std;
 

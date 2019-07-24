@@ -1,7 +1,4 @@
 #include "pch.h"
-#include <stdexcept>
-#include <gtest/gtest.h>
-#include "../DataStructuresLib/Stack.h"
 
 using namespace std;
 

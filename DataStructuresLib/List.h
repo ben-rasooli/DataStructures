@@ -134,6 +134,13 @@ public:
 				return _items[i];
 	}
 
+	int IndexOf(const function <bool(T)> predicate)
+	{
+		for (int i = 0; i < _count; i++)
+			if (predicate(_items[i]))
+				return i;
+	}
+
 	bool HasValue(T item)
 	{
 		for (int i = 0; i < _count; i++)
@@ -144,13 +151,14 @@ public:
 	}
 
 
-	T operator[] (int index)
+	T& operator[] (int index)
 	{
 		if (index < 0 || index >= _count)
 			throw std::out_of_range("index out of range");
 
 		return _items[index];
 	}
+
 
 	void Sort()
 	{

@@ -1,10 +1,4 @@
 #include "pch.h"
-#include <stdexcept>
-#include <gtest/gtest.h>
-#include <sstream>
-#include "../DataStructuresLib/BinaryTree.h"
-#include "../DataStructuresLib/BinaryTreeNode.h"
-#include "../DataStructuresLib/List.h"
 
 using namespace std;
 

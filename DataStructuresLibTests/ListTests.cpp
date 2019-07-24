@@ -1,7 +1,4 @@
 #include "pch.h"
-#include <stdexcept>
-#include <gtest/gtest.h>
-#include "../DataStructuresLib/List.h"
 
 using namespace std;
 
